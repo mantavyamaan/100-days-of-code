@@ -1,0 +1,22 @@
+print("Welcome to the treasure island. \nYour mission is to find the treasure. \nYou're at a cross road. Where do you want to go?")
+choice=input('       Type "left" or "right\n"').lower()
+
+while choice!='left' and choice!='right':
+    choice=input("Type Correct Choice.\n")
+
+if choice=='left':
+    c1=input('Do you want to "swim" or "wait"\n').lower()
+    while c1!='wait' and c1!='swim':
+        c1=input("Type Correct Choice.\n")
+    if c1=='wait':
+        c2=input('Enter colour of door. "Red" "Blue" "Green"\n').lower()
+        while c2!='red' and c2!='blue' and c2!='green':
+            c2=input("Type Correct Choice.\n")
+        if c2=='red':
+            print("You Won")
+        else:
+            print("Game Over")
+    else:
+        print("Game Over")
+else:
+    print("Game Over")
