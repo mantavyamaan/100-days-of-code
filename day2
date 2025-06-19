@@ -1,0 +1,5 @@
+print('Welcome to the tip calucaltor')
+bill=float(input("How much was the bill: "))
+tip=float(input("How much tip would you like to give: "))
+split=float(input("How many people will split the bill: "))
+print(f"Each person's split is: {round((bill+bill*tip/100)/split,2)}")
