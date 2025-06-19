@@ -1,0 +1,33 @@
+print("Welcome to the Secret Bidder")
+
+req='yes'
+
+participants={}
+
+while req=='yes':
+    a=input("Name of the Participant: \n")
+    b=int(input("Enter the bid you want to make: \n"))
+    participants[a]=b
+    req=input("Are there more participants: Type 'yes or 'no'\n").lower()
+    print('\n'*20)
+
+max_bid=0
+
+for i in participants:
+    if participants[i]>=max_bid:
+        max_bid=participants[i]
+
+s=0
+for i in participants:
+    if participants[i]==max_bid:
+        name=i
+        s+=1
+
+if s==1:
+    print(f"The winner of the game is {name} with a bid of {max_bid}")
+else:
+    print("Its a draw between: ", end="")
+    for i in participants:
+        if participants[i]==max_bid:
+            print(i, end=' ')
+    print(f'; with bid of {max_bid}')
