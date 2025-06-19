@@ -1,0 +1,108 @@
+import random
+
+def win_or_lose(my_cards,computer_cards):
+    my_sum=0
+    comp_sum=0
+    for i in my_cards:
+        my_sum+=i
+    for i in computer_cards:
+        comp_sum+=i
+    if 21-my_sum>21-comp_sum:
+        print('You Lost')
+    elif 21-my_sum<21-comp_sum:
+        print('You Won')
+    else:
+        print("Its a draw")
+
+def check_21(my_cards):
+    my_sum=0
+    for i in my_cards:
+        my_sum+=i
+    if my_sum>=22:
+        print("You Lost")
+        return 1
+
+print("Welcome to the blackjack game")
+play_game='y'
+
+cards=[11,11,11,11,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,8,9,9,9,9,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]
+
+while play_game=='y':
+    my_cards=[]
+    x=0
+    x=random.choice(cards)
+    my_cards.append(x)
+    cards.remove(x)
+    x=random.choice(cards)
+    my_cards.append(x)
+    cards.remove(x)
+    computer_cards=[]
+    x=random.choice(cards)
+    computer_cards.append(x)
+    cards.remove(x)
+    x=random.choice(cards)
+    computer_cards.append(x)
+    cards.remove(x)
+    print(f"Your Cards: {my_cards}")
+    print(f"Computers Cards: {computer_cards[0]}")
+    play_turn=input("Type 'y' to get another card and 'n' to pass\n")
+    k=0
+    ace_sum=0
+    u=0
+    r=0
+    while play_turn=='y':
+        x=random.choice(cards)
+        my_cards.append(x)
+        cards.remove(x)
+        print(f"Your Cards: {my_cards}")
+        for i in my_cards:
+            ace_sum+=i
+        for i in my_cards:
+            if i==11 and ace_sum>21:
+                r=1
+                break
+            u+=1
+        if r==1:
+            my_cards[u]=1
+            print(f"Your Cards: {my_cards}")
+        u=0
+        r=0
+        k=check_21(my_cards)
+        if k==1:
+            play_turn='n'
+        else:
+            play_turn=input("Type 'y' to get another card and 'n' to pass\n")
+    if k!=1:
+        print(f"Computers Cards: {computer_cards}")
+        c_sum=0
+        o=0
+        a=0
+        b=0
+        for i in computer_cards:
+            c_sum+=i
+        while c_sum<=16:
+            x=random.choice(cards)
+            computer_cards.append(x)
+            cards.remove(x)
+            print(f"Computers Cards: {computer_cards}")
+            c_sum+=computer_cards[-1]
+            for i in computer_cards:
+                if i==11 and c_sum>21:
+                    a=1
+                    break
+                b+=1
+            if a==1:
+                computer_cards[b]=1
+                print(f"Computers Cards: {computer_cards}")
+                c_sum=0
+                for i in computer_cards:
+                    c_sum+=i
+            a=0
+            b=0
+            if c_sum>=22:
+                print('You Won')
+                o=1
+        if o!=1:
+            win_or_lose(my_cards,computer_cards)
+    play_game=input("Do you want to continue playing. Type 'y' for continue playing and 'n' for stopping\n")
+    cards=[11,11,11,11,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,8,9,9,9,9,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]
