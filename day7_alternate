@@ -1,0 +1,52 @@
+import random
+import sys
+
+print('Welcome to the Hangman Game')
+n=int(input('Enter the number of letter word you want: \n'))
+
+l=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+req_word=[]
+actual=[]
+for i in range(n):
+    t=random.choice(l)
+    req_word+=t
+    actual+=t
+
+word=[]
+for i in range(n):
+    word+='_'
+
+after_word=[]
+for i in range(n):
+    after_word+='$'
+
+guess=5
+while guess>=0:
+    if req_word==after_word:
+        print('You Guessed the Right Word')
+        print("You Won")
+        sys.exit()
+    g=input("Enter a letter: \n").lower()
+    j=0
+    k=0
+    for l in req_word:
+        if g==l:
+            req_word[j]='$'
+            word[j]=g
+            k=1
+            break
+        j+=1
+
+    if k==0:
+        guess=guess-1
+        if guess!=0:
+            print('You Lost a Life')
+    for i in word:
+        print(i,end='')
+    print('')
+
+print("You Lost the game")
+print(f"The Actual Word was: ",end='')
+for i in actual:
+    print(i,end='')
+print('')
