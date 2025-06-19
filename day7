@@ -1,0 +1,44 @@
+import random
+import hangman_words
+
+print('***************Welcome to the Hangman Game************************')
+chosen_word=random.choice(hangman_words.word_list)
+print(chosen_word)
+
+word=''
+for i in range(len(chosen_word)):
+    word+="_"
+print(f'Word to guess: {word}')
+
+correct_letter=[]
+
+lives=6
+game_over=False
+
+while not game_over:
+    print(f"***********************{lives}/6 LIVES REMAINNIG********************")
+    guess=input("Guess a letter: ").lower()
+    display='' 
+    for letters in chosen_word:
+        if letters==guess:
+            display+=letters
+            correct_letter.append(letters)
+        elif letters in correct_letter:
+            display+=letters
+        else:
+            display+='_'
+
+    if guess not in chosen_word:
+        lives-=1
+        print(f"You have guessed: {guess}. That's not in word. You Lost a Life")
+
+    if '_' not in display:
+        print(f"**************You guessed the correct word: {chosen_word}. You Won**************************")
+        game_over=True
+    
+    if game_over==False:
+        print(f"Word to guess: {display}")
+
+    if lives==0:
+        print(f"*************The Correct word was: {chosen_word}. You Lost*******************")
+        game_over=True
