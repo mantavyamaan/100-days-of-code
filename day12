@@ -1,0 +1,34 @@
+import random
+
+def compare(guess,number):
+    if guess>number:
+        return "Too High"
+    elif guess<number:
+        return "Too Low"
+    else:
+        return "You guessed the correct number"
+
+
+def game():
+    print("Welcome to the number guesser game.\nWell I am thinking of a number between 1 and 100")
+    number=random.randint(1,100)
+    print(f"The correct answer is: {number}")
+    game_mode=input("Choose a game mode: 'easy' or ' hard'\n")
+    if game_mode=='easy':
+        chances=10
+    elif game_mode=='hard':
+        chances=5
+    for i in range(chances):
+        print(f"You have {chances-i} guesses remaining")
+        guess=int(input("Make a guess: "))
+        u=compare(guess,number)
+        print(u)
+        if u=="You guessed the correct number":
+            break
+        elif (chances-i)==1:
+            print(f"All the chances are over. You Lost, the correct number was {number}")
+
+play_game='y'
+while play_game=='y':
+    game()
+    play_game=input("Do You want another round. Type 'y' for yes and 'n' for no.\n")
