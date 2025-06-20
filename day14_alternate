@@ -1,0 +1,35 @@
+from Day14_gamedata import data
+import random
+
+def display(person):
+    person_name=person["name"]
+    person_description=person["description"]
+    person_country=person["country"]
+    return f"{person_name}, {person_description}, {person_country}"
+
+print("Welcome to the game of higher or lower")
+n=''
+score=0
+a=random.choice(data)
+b=random.choice(data)
+while b==a:
+    b=random.choice(data)
+
+while n!='lost':
+    print(f"Compare A: {display(a)}")
+    print(f"Against B: {display(b)}")
+    choice=input("Who has more followers: 'A' or 'B'\n").upper()
+    if a["follower_count"]>b["follower_count"] and choice=="A":
+        score+=1
+        print(f"Right guess. Your Score: {score}")
+    elif a["follower_count"]<b["follower_count"] and choice=="B":
+        score+=1
+        print(f"Right guess. Your Score: {score}")
+    else:
+        n='lost'
+        print(f"You guessed wrong. Final score: {score}")
+    a=b
+    b=random.choice(data)
+    if b==a:
+        b=random.choice(data)
+    
