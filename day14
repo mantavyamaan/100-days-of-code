@@ -1,0 +1,28 @@
+from Day14_gamedata import data
+import sys
+import random
+
+print("Welcome to the game of higher or lower")
+n=''
+score=0
+random.shuffle(data)
+while n!='lost':
+    print(f"Compare A: {data[score]["name"]}, {data[score]["description"]}, from {data[score]["country"]}")
+    print(f"Against B: {data[score+1]["name"]}, {data[score+1]["description"]}, from {data[score+1]["country"]}")
+    choice=input("Who has more followers: 'A' or 'B'\n").upper()
+    if choice=="A" and data[score]["follower_count"]>data[score+1]["follower_count"]:
+        b=data[score]
+        data[score+1]=data[score]
+        data[score]=b
+        score+=1
+        print(f"You are right. Your Current Score is: {score}")
+    elif choice=="B" and data[score]["follower_count"]<data[score+1]["follower_count"]:
+        score+=1
+        print(f"You are right. Your Current Score is: {score}")
+    else:
+        n='lost'
+        print(f"You are wrong. Your end score is: {score}")
+        sys.exit()
+    if score==49:
+        print("You completed the game.")
+        sys.exit()
